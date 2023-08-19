@@ -1,22 +1,30 @@
-// gsap.from('.header', { duration: 1, y: '-100%', ease: 'bounce' })
-// gsap.from('.link', { duration: 1, opacity: 0, delay: 1, stagger: .5 })
-// gsap.from('.right', { duration: 1, x: '-100vw', delay: 1, ease: 'power2.in' })
-// gsap.from('.left', { duration: 1, delay: 1.5, x: '-100%' })
-// gsap.to('.footer', { duration: 1, y: 0, ease: 'elastic', delay: 2.5 })
-// gsap.fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { duration: 1, delay: 3.5, opacity: 1, scale: 1, rotation: 0 })
+
+/*
+  From specifies the starting position, To specifies the ending position, fromTo specifies both starting and ending positions.
+
+
+
+*/
 
 const timeline = gsap.timeline({ defaults: { duration: 1 }})
 timeline
-  .from('.header', { y: '-100%', ease: 'bounce' })
-  .from('.link', { opacity: 0, stagger: .5 })
-  .from('.right', { x: '-100vw', ease: 'power2.in' }, 1)
+  .from('.header', { y: '-100%', ease: 'expo' }, 1)
+  .from('.link', { opacity: 0, stagger: .5 },5)
+  .from('.right', { x: '-100vw', ease: 'power2.in'})
   .from('.left', { x: '-100%' }, '<.5')
   .to('.footer', {  y: 0, ease: 'elastic' })
+  .fromTo('.box', { opacity: 0, scale: 10, rotation: 720 }, { opacity: 1, scale: 1, rotation: 0, ease: 'power2.in' })
   .fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { opacity: 1, scale: 1, rotation: 0 })
+  .restart()
 
 const button = document.querySelector('.button')
+const Restartbutton = document.getElementById('RestartButton')
 
 button.addEventListener('click', () => {
-  timeline.timeScale(3)
+  timeline.timeScale(50)
   timeline.reverse()
+})
+
+Restartbutton.addEventListener('click', () => {
+  timeline.restart();
 })
